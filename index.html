@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Ponto</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/3.0.0/fetch.min.js"></script>
+</head>
+<body>
+    <h1>Consulta de Ponto</h1>
+
+    <!-- Textarea para colar a lista de usuários -->
+    <textarea id="inputLocalList" rows="10" cols="50" placeholder="Cole a lista de usuários aqui..."></textarea><br><br>
+    <textarea id="data_list" rows="10" cols="50" value="data"></textarea><br><br>
+  
+
+    <!-- Campos de data -->
+    <label for="data_inicio">Data de Início:</label>
+    <input type="date" id="data_inicio"><br><br>
+
+    <label for="data_final">Data de Fim:</label>
+    <input type="date" id="data_final"><br><br>
+
+    <!-- Campos de guarnição -->
+
+    <label for="guarnicao">Guarnição:</label>
+    <select type="select" id="guarnicao">
+        <option value="1">PMERJ</option>
+        <option value="2">BPM</option>
+        <option value="3">GAM</option>
+        <option value="4">PATAMO</option>
+        <option value="6">BOPE</option>
+        <option value="7">CHOQUE</option>
+        <option value="8">CURSOS</option>
+        <option value="9">REUNIÃO</option>
+        <option value="10">INSTRUÇÃO</option>
+        <option value="11">COMANDO</option>
+        <option value="12">AGUARDANDO PTR</option>
+        <option value="14">INCURSÃO</option>
+        <option value="21">COE</option>
+
+    </select><br><br>
+
+     <!-- Botão para enviar a consulta -->
+     <button onclick="consultar()">Consultar</button>
+
+     <script>
+        // função simulando um processamento assíncrono
+        async function processarConsulta() {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve([
+                        {
+                            usuarioId: '1143',
+                            nomeUsuario: '[BOPE.¹TNT] Hunter RBP | 2689',
+                            totalTempo: '1 horas e 13 minutos',
+                        },
+                    ]);
+                }, 1000); // simula 1 segundo de atraso
+            });
+        }
+
+        async function consultar() {
+            try {
+                const data = await processarConsulta(); // aguarda a resolução da promise
+                console.log('resultado da consulta:', data);
+
+                // transforma o resultado em texto para exibição
+                const dataText = data.map(
+                    (item) =>
+                        `ID: ${item.usuarioId}, Nome: ${item.nomeUsuario}, Tempo: ${item.totalTempo}`
+                ).join('\n');
+
+                // insere o texto formatado no textarea
+                document.getElementById('data_list').value = dataText;
+            } catch (error) {
+                console.error('erro ao processar consulta:', error);
+            }
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
