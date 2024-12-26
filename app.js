@@ -22,7 +22,6 @@ async function compareData() {
         const uniqueKeys = extractUniqueKeys(cleanedList); // Extrai os IDs da lista local
         const matches = findMatchingIds(uniqueKeys, apiData);
         storedResults = matches; // Armazena os resultados na variável
-        console.log('Resultados armazenados:', storedResults); // Exibe os resultados armazenados no console
         // Se quiser salvar no localStorage (para persistir após recarregar a página):
         localStorage.setItem('matchResults', JSON.stringify(storedResults));
     }).catch(error => {
@@ -86,7 +85,6 @@ async function processarConsultaPonto(data_inicio, data_final) {
 // Função para pegar o valor do textarea e obter os ids de usuários
 async function processarConsulta() {
      const data = await compareData();
-     console.log("CHEGOU OU NAO chegou",data);
      return data;
 }
 
